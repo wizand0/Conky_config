@@ -1,0 +1,170 @@
+use_xft yes
+xftfont DejaVu Sans:size=10
+xftalpha 0.8
+text_buffer_size 2048
+
+
+# Update interval in seconds
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+total_run_times 0
+
+own_window yes
+#own_window_transparent yes
+
+#own_window_type override
+#own_window_type desktop
+own_window_type normal #use this if you want a nice shadow to appear around conky
+
+# If own_window is yes, these window manager hints may be used
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 220 0
+#maximum_width 200
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_margin 5
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color white
+#default_shade_color black
+#default_outline_color grey
+own_window_colour 000000
+
+# Text alignment, other possible values are commented
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+#alignment middle_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 20
+gap_y 50
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about? This only affects certain objects.
+use_spacer none
+
+own_window_argb_value 20
+own_window_argb_visual yes
+TEXT
+${font Zekton:Bold:size=11}SYSTEM ${hr 2}
+#Command exec cut ..  know the distribution
+${font Zekton:Bold:size=12}${alignc 0}${exec cut -d '\' -f 1 /etc/issue}
+${voffset -30}${font OpenLogos:size=40}t
+#Hostname
+${voffset -85}${alignc =10}${font Capture it:size=16}${nodename}
+#PC
+${font Zekton:Bold:size=12}${alignc 0}User: $user_names
+#${font Zekton:Bold:size=12}${alignc 0}https://github.com/wizand0
+${font DejaVu Sans:Bold:size=13}K${font}   Kernel: ${alignr}${kernel}
+${font PizzaDude Bullets:size=10}B${font}${alignr}${execi 1000 grep model /proc/cpuinfo | cut -d : -f2 | tail -1 | sed 's/\s//'}
+
+${font sans-serif:bold:size=8}TEMP : NVME: ${color3}${if_match ${hwmon 3 temp 1}>=70}${color8}${endif}${if_match ${hwmon 3 temp 1}>=90}${color9}${endif}${hwmon 3 temp 1}°C  CPU ${color3}${if_match ${hwmon 1 temp 1}>=70}${color8}${endif}${if_match ${hwmon 1 temp 1}>=90}${color9}${endif}${hwmon 1 temp 1}°C GPU: ${color3}${if_match ${hwmon 4 temp 1}>=70}${color8}${endif}${if_match ${hwmon 4 temp 1}>=90}${color9}${endif}${hwmon 4 temp 1}°C  BATT: ${color3}${if_match ${hwmon 5 temp 1}>=70}${color8}${endif}${if_match ${hwmon 5 temp 1}>=90}${color9}${endif}${hwmon 5 temp 1}°C${color2}
+
+${font sans-serif:bold:size=7}${goto 30}CPU 1 ${goto 106}CPU 2${goto 180}CPU 3${goto 255}CPU 4
+${voffset -3}${color3}${if_match ${cpu cpu1}>=70}${color8}${endif}${if_match ${cpu cpu1}>95}${color9}${endif}${goto 18}${cpugraph cpu1 13,50}${if_match ${cpu cpu2}>=70}${color8}${endif}${if_match ${cpu cpu2}>95}${color9}${endif}${goto 94}${cpugraph cpu2 13,50}${if_match ${cpu cpu3}>=70}${color8}${endif}${if_match ${cpu cpu3}>95}${color9}${endif}${goto 168}${cpugraph cpu3 13,50}${if_match ${cpu cpu4}>=70}${color8}${endif}${if_match ${cpu cpu4}>95}${color9}${endif}${goto 243}${cpugraph cpu4 13,50}
+${voffset -3}${color3}${if_match ${cpu cpu1}>=70}${color8}${endif}${if_match ${cpu cpu1}>95}${color9}${endif}${font sans-serif:normal:size=8}${goto 35}${cpu cpu1}%${if_match ${cpu cpu2}>=70}${color8}${endif}${if_match ${cpu cpu2}>95}${color9}${endif}${goto 111}${cpu cpu2}%${if_match ${cpu cpu3}>=70}${color8}${endif}${if_match ${cpu cpu3}>95}${color9}${endif}${goto 185}${cpu cpu3}%${if_match ${cpu cpu4}>=70}${color8}${endif}${if_match ${cpu cpu4}>95}${color9}${endif}${goto 260}${cpu cpu4}%${color2}
+${font sans-serif:bold:size=7}${goto 30}CPU 5 ${goto 106}CPU 6${goto 180}CPU 7${goto 255}CPU 8
+${voffset -3}${color3}${if_match ${cpu cpu5}>=70}${color8}${endif}${if_match ${cpu cpu5}>95}${color9}${endif}${goto 18}${cpugraph cpu5 13,50}${if_match ${cpu cpu6}>=70}${color8}${endif}${if_match ${cpu cpu6}>95}${color9}${endif}${goto 94}${cpugraph cpu6 13,50}${if_match ${cpu cpu7}>=70}${color8}${endif}${if_match ${cpu cpu7}>95}${color9}${endif}${goto 168}${cpugraph cpu7 13,50}${if_match ${cpu cpu8}>=70}${color8}${endif}${if_match ${cpu cpu8}>95}${color9}${endif}${goto 243}${cpugraph cpu8 13,50}
+${voffset -3}${color3}${if_match ${cpu cpu5}>=70}${color8}${endif}${if_match ${cpu cpu5}>95}${color9}${endif}${font sans-serif:normal:size=8}${goto 35}${cpu cpu5}%${if_match ${cpu cpu6}>=70}${color8}${endif}${if_match ${cpu cpu6}>95}${color9}${endif}${goto 111}${cpu cpu6}%${if_match ${cpu cpu7}>=70}${color8}${endif}${if_match ${cpu cpu7}>95}${color9}${endif}${goto 185}${cpu cpu7}%${if_match ${cpu cpu8}>=70}${color8}${endif}${if_match ${cpu cpu8}>95}${color9}${endif}${goto 260}${cpu cpu8}%${color2}
+
+#${font StyleBats:Bold:size=16}A${font} CPU 1: ${cpu cpu1}% ${alignr}${cpubar cpu1 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 1: ${cpu cpu1}% ${alignr}${cpubar cpu1 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 2: ${cpu cpu2}% ${alignr}${cpubar cpu2 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 3: ${cpu cpu3}% ${alignr}${cpubar cpu3 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 4: ${cpu cpu4}% ${alignr}${cpubar cpu4 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 5: ${cpu cpu5}% ${alignr}${cpubar cpu5 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 6: ${cpu cpu6}% ${alignr}${cpubar cpu6 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 7: ${cpu cpu6}% ${alignr}${cpubar cpu7 8,60}
+#${font StyleBats:Bold:size=16}A${font} CPU 8: ${cpu cpu6}% ${alignr}${cpubar cpu8 8,60}
+${font StyleBats:Bold:size=16}g${font} RAM: $mem $memperc% ${alignr}${membar 8,60}
+${font StyleBats:Bold:size=16}j${font} SWAP: $swap $swapperc% ${alignr}${swapbar 8,60}
+${font Webdings:Bold:size=16}~${font}Battery: ${battery_percent BATT}% ${alignr}${battery_bar 8,60 BATT}
+${font StyleBats:Bold:size=16}q${font} Uptime: ${alignr}${uptime}
+
+${font Zekton:Bold:size=11}DATE ${hr 2}
+${alignc 0}${font Capture it:size=36}${time %H:%M}${font Zekton:size=14}
+${voffset 2}${alignc}${time %A, %d %B %Y}
+${font Zekton:Bold:size=11}SSD ${hr 2}
+${voffset 4}${font Pie charts for maps:Bold:size=14}7${font} ${voffset -5}Root:
+${voffset 4}${fs_used /}/${fs_size /} ${alignr}${fs_bar 8,60 /}
+${font Pie charts for maps:Bold:size=14}m${font} ${voffset -5}Home:
+${voffset 4}${fs_used /home}/${fs_size /home} ${alignr}${fs_bar 8,60 /home}
+#${font Pie charts for maps:Bold:size=14}m${font} ${voffset -5}Timshift:
+#${voffset 4}${fs_used /mnt/tsb}/${fs_size /mnt/tsb} ${alignr}${fs_bar 8,60 /mnt/tsb}
+
+${font Zekton:Bold:size=11}NETWORK ${hr 2}
+#Wired = enp3s0f1 and WiFi = wlp1s0
+${if_existing /proc/net/route enp3s0f1}
+${voffset -15}${alignc 0}${font Capture it:size=12}W i r e  d
+${font PizzaDude Bullets:size=14}O${font} Up: ${upspeed enp3s0f1}${alignr}${upspeedgraph enp3s0f1 8,60 black black}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font} Down: ${downspeed enp3s0f1}${alignr}${downspeedgraph enp3s0f1 8,60 black black}
+${voffset 4}${font PizzaDude Bullets:size=14}N${font} Upload: ${alignr}${totalup enp3s0f1}
+${voffset 4}${font PizzaDude Bullets:size=14}T${font} Dowload: ${alignr}${totaldown enp3s0f1}
+
+${alignc}IPv4
+${voffset 4}${font StyleBats:size=16}Y${font} Gateway: ${alignr}${gw_ip enp3s0f1}
+${voffset 4}${font StyleBats:size=16}Z${font} Local: ${alignr}${addr enp3s0f1}
+${voffset 4}${font StyleBats:size=16}N${font} Public: ${alignr}${color2}${execi 1000 wget http://checkip.dyndns.org/ -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'}
+${alignc}IPv6
+${voffset 4}${font StyleBats:size=16}Z${font} Local: ${alignr}${execi 1000 ip addr show dev enp3s0f1 | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | cut -d $'\n' -f3}
+${voffset 4}${font StyleBats:size=16}N${font} Prefix: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f4-8}
+${voffset 4}${font StyleBats:size=16}N${font} Subnet: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f1-3,5-8}
+${voffset 4}${font StyleBats:size=16}N${font} Interface: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f1-4}
+${else}${if_existing /proc/net/route wlp1s0}${alignc 0}${font Capture it:size=12}W i F i
+${font}SSID: ${wireless_essid wlp1s0}
+Signal: ${wireless_link_qual_perc wlp1s0}% ${alignr}${wireless_link_bar 8,60 wlp1s0}
+${font PizzaDude Bullets:size=14}O${font} Up: ${upspeed wlp1s0}${alignr}${upspeedgraph wlp1s0 8,60 black black}
+${voffset 4}${font PizzaDude Bullets:size=14}U${font} Down: ${downspeed wlp1s0}${alignr}${downspeedgraph wlp1s0 8,60 black black}
+${voffset 4}${font PizzaDude Bullets:size=14}N${font} Upload: ${alignr}${totalup wlp1s0}
+${voffset 4}${font PizzaDude Bullets:size=14}T${font} Download: ${alignr}${totaldown wlp1s0}
+
+${alignc}IPv4
+${voffset 4}${font StyleBats:size=16}Y${font} Gateway: ${alignr}${gw_ip wlp1s0}
+${voffset 4}${font StyleBats:size=16}Z${font} Local: ${alignr}${addr wlp1s0}
+${voffset 4}${font StyleBats:size=16}N${font} Public: ${alignr}${color2}${execi 1000 wget http://checkip.dyndns.org/ -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'}
+${alignc}IPv6
+${voffset 4}${font StyleBats:size=16}Z${font} Local: ${alignr}${execi 1000 ip addr show dev wlp1s0 | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d' | cut -d $'\n' -f3}
+${voffset 4}${font StyleBats:size=16}N${font} Prefix: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f4-8}
+${voffset 4}${font StyleBats:size=16}N${font} Subnet: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f1-3,5-8}
+${voffset 4}${font StyleBats:size=16}N${font} Interface: ${alignr}${color2}${execi 1000 wget http://checkipv6.dyndns.org/ -q -O - | grep -Eo '\<[[:alnum:]]{1,4}(\:[[:alnum:]]{1,4}){7}\>' | cut -d ':' --complement -f1-4}
+${endif}
